@@ -7,7 +7,7 @@ import Vapor
 
 /// Catches validation errors and prints
 /// out a more readable JSON response.
-public class ValidationMiddleware: Middleware {
+public final class ValidationMiddleware: Middleware {
     public init() {}
 
     public func respond(to request: Request, chainingTo next: Responder) throws -> Response {
@@ -24,4 +24,10 @@ public class ValidationMiddleware: Middleware {
         }
     }
     
+}
+
+extension ValidationMiddleware: ConfigInitializable {
+    public convenience init(config: Config) throws {
+        self.init()
+    }
 }
