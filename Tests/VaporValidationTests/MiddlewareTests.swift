@@ -12,8 +12,11 @@ class MiddlewareTests: XCTestCase {
     ]
 
     func testValidationMiddleware() throws {
-        let drop = try Droplet()
-        try drop.addProvider(VaporValidation.Provider())
+        var config = Config([:])
+        try config.set("droplet.middleware", ["error", "validation"])
+        try config.addProvider(VaporValidation.Provider.self)
+        
+        let drop = try Droplet(config)
         
         drop.get("*") { req in
             let path = req.uri.path
@@ -25,12 +28,12 @@ class MiddlewareTests: XCTestCase {
         drop.get("uncaught") { _ in throw Abort.notFound }
 
         let request = try Request(method: .get, uri: "http://0.0.0.0/thisPathIsWayTooLong")
-        let response = drop.respond(to: request)
+        let response = try drop.respond(to: request)
         let json = response.json
         XCTAssertEqual(json?["error"]?.bool, true)
         XCTAssertEqual(json?["message"]?.string, "Validation failed with the following errors: \'Validator Error: Count<String> failed validation: /thisPathIsWayTooLong count 21 is greater than maximum 10\n\nIdentifier: Validation.ValidatorError.failure\'")
         let fail = try Request(method: .get, uri: "http://0.0.0.0/uncaught")
-        let failResponse = drop.respond(to: fail)
+        let failResponse = try drop.respond(to: fail)
         XCTAssertEqual(failResponse.status, .notFound)
     }
 }
