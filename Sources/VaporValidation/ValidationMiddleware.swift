@@ -1,5 +1,3 @@
-// TODO: Provider
-
 import HTTP
 import Validation
 import JSON
