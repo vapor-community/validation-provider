@@ -21,7 +21,6 @@ public final class ValidationMiddleware: Middleware {
             return response
         }
     }
-    
 }
 
 extension ValidationMiddleware: ConfigInitializable {
