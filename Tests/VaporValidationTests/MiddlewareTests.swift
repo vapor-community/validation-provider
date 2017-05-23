@@ -1,4 +1,4 @@
-@testable import Vapor // not @testable to ensure Middleware classes are public
+import Vapor // not @testable to ensure Middleware classes are public
 import XCTest
 import HTTP
 import VaporValidation

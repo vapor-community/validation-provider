@@ -1,5 +1,3 @@
-// TODO: Provider
-
 import HTTP
 import Validation
 import JSON
@@ -23,7 +21,6 @@ public final class ValidationMiddleware: Middleware {
             return response
         }
     }
-    
 }
 
 extension ValidationMiddleware: ConfigInitializable {
