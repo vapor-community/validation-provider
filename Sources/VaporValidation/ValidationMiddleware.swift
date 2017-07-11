@@ -6,7 +6,7 @@ import Vapor
 /// Catches validation errors and prints
 /// out a more readable JSON response.
 @available(*, deprecated, message: "Please import ValidationProvider instead of VaporValidation.")
-public final class ValidationMiddleware: Middleware {
+public final class ValidationMiddleware: Middleware, ConfigInitializable {
     public init() {}
 
     public func respond(to request: Request, chainingTo next: Responder) throws -> Response {
@@ -22,9 +22,7 @@ public final class ValidationMiddleware: Middleware {
             return response
         }
     }
-}
-
-extension ValidationMiddleware: ConfigInitializable {
+    
     public convenience init(config: Config) throws {
         self.init()
     }
