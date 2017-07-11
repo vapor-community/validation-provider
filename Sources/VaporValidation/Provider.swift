@@ -1,6 +1,7 @@
 import Vapor
 @_exported import Validation
 
+@available(*, deprecated, message: "Please import ValidationProvider instead of VaporValidation.")
 public final class Provider: Vapor.Provider {
     public static let repositoryName = "validation-provider"
     

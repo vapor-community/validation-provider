@@ -5,6 +5,7 @@ import Vapor
 
 /// Catches validation errors and prints
 /// out a more readable JSON response.
+@available(*, deprecated, message: "Please import ValidationProvider instead of VaporValidation.")
 public final class ValidationMiddleware: Middleware {
     public init() {}
 
