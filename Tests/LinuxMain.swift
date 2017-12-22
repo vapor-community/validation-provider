@@ -1,5 +1,5 @@
 import XCTest
-@testable import VaporValidationTests
+@testable import ValidationProviderTests
 
 XCTMain([
     testCase(MiddlewareTests.allTests),
